@@ -1,0 +1,2 @@
+class Sender extends SenderAbstract
+    

@@ -1,0 +1,1 @@
+class VerticalMenu extends Element
