@@ -95,4 +95,39 @@ class Form extends Element
             maxSize += child.getSizeInScreen() * 1
         
         maxSize
+       
+    #retorna a altura utilizada pelos filhos de um container   
+    getUsedHeight: () ->
+        if @children.length == 0
+            return 0
+            
+        firstChild =@children[0]
+        lastChild = @children[@children.length-1]
+
+        if firstChild.getBottom() > lastChild.getBottom()
+            maxBottom = firstChild.getBottom()
+        else
+            maxBottom = lastChild.getBottom()
+
+        if firstChild.getTop() > lastChild.getTop()
+            maxTop = firstChild.getTop()
+        else
+            maxTop = lastChild.getTop()    
+
+        usedHeight = maxBottom - maxTop
+    
+    getMaxBottom: () ->
+        firstChild =@children[0]
+        lastChild = @children[@children.length-1]
+
+        if firstChild.getBottom() > lastChild.getBottom()
+            maxBottom = firstChild.getBottom()
+        else
+            maxBottom = lastChild.getBottom()
+        maxBottom
+        
+
+    getVerticalPadding: () ->
+        return 15;
+        
         

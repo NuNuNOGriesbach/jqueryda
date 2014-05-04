@@ -133,6 +133,12 @@ class Element
     decWidth: (value) ->
         @setWidth(@getRealWidth()-value)
     
+    incHeight: (value) ->
+        @setHeight(@getHeight()+value)
+    
+    decHeight: (value) ->
+        @setHeight(@getHeight()-value)
+    
     #Número de caracteres que o elemento contém, normalmente igual ao definido na base de dados
     #Se não for definido um tamanho especifico para exibição, este valor será usado para calculos
     #de proporções

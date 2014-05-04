@@ -15,8 +15,9 @@ class CreateCommand
         $(window).load () -> 
             render.render()
             render.defineContainerWidths(this)
-            render.startElements()
             render.defineContainerHeights(this)
+            render.startElements()
+            
             
     create: (element, attribs)->
         instance = @getInstance(attribs.type, attribs)

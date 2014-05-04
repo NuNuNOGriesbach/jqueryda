@@ -48,6 +48,8 @@ class FormRender extends SpecificElementRender
             line.afterFormStart()
             
     realignElement: (def, renderizer) ->
+        @heightsDefined = false
+        @widthsDefined = false
         $(ret).removeClass('form')        
         def.firstSize = $('body').width()
         $(def.element).width('100%')
@@ -88,7 +90,7 @@ class FormRender extends SpecificElementRender
         Math.round (element.size * sizeScreen / componentsSizes) - 1
         
     defineContainerWidths: (def, renderizer) ->
-        
+        @widthsDefined = true
         lineRenders = def.getLineRenders()
         groupRenders = def.getGroupRenders()
         pagerRenders = def.getPagerRenders()
@@ -104,4 +106,30 @@ class FormRender extends SpecificElementRender
         for line in lineRenders
             line.element.setWidth("100%")    
             line.element.setInternalWidth(line.element.getRealWidth())
+       
+    
+    
+    
+    defineContainerHeights: (def, renderizer) ->
+        @heightsDefined = true
+        lineRenders = def.getLineRenders()
+        groupRenders = def.getGroupRenders()
+        pagerRenders = def.getPagerRenders()
+        maxPage = null
+                        
+        for pager in pagerRenders            
+            maxUsedHeight = 0
+            if pager.element.children.length > 0
+                for page in pager.element.children
+                    usedHeight = page.getUsedHeight()
+                    if usedHeight > maxUsedHeight
+                        maxUsedHeight = usedHeight
+                        maxBottom = page.getMaxBottom()
+                        maxPage = page
+                
+            pager.element.setHeight(maxUsedHeight)
+            if pager.element.getBottom() < maxBottom
+                diff = maxBottom - maxUsedHeight - pager.element.getTop()
+                pager.element.setHeight(diff)
+
         

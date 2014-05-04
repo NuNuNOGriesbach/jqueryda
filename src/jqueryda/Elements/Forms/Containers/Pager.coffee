@@ -11,3 +11,8 @@ class Pager extends Form
     #Estilo Page: Elementos seguirão regras de outro container
     getContainerStyle: () ->
         'Page'
+        
+    setHeigth: (height) ->
+        for page in @children
+            page.setHeight(height)            
+        super(height)

@@ -72,8 +72,9 @@ class RenderizerAbstract
         for instance in @containers   
             instance.specificRender.markElements?(instance, this)        
             
-            if instance.parent                 
-                instance.parent.specificRender.defineContainerWidths(instance.parent, this)
+            if instance.parent 
+                if not instance.parent.specificRender.widthsDefined                
+                    instance.parent.specificRender.defineContainerWidths(instance.parent, this)
             else
                 instance.setWidth('100%')
                 
@@ -82,4 +83,16 @@ class RenderizerAbstract
             
     #Evento chamado ao fim do processo, para que container renderizados lado-a-lado possam assumir a mesma altura   
     defineContainerHeights: (createCommand) ->
-    
+        elements = 0
+        for instance in @containers   
+            #console.log(instance.id, 'container')
+            instance.specificRender.markElements?(instance, this)        
+            
+            if instance.parent                 
+                if not instance.parent.specificRender.heightsDefined
+                    instance.parent.specificRender.defineContainerHeights(instance.parent, this)
+            else
+                instance.setHeight('100%')
+                
+        #@stop()
+        console.log('RENDER_ABSTRACT: Alturas de containers definidas')
