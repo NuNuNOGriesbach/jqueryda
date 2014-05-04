@@ -160,6 +160,12 @@ class Element
         
     setHeight: (value) ->
         $(@component).css('height', value)
+        try
+            real = @getHeight()
+            diferenca = real - value
+            $(@component).css('height', value - diferenca) 
+            
+        catch e
         
     hidde: () ->
         $(@component).hidde()

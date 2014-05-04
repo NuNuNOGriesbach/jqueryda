@@ -1,7 +1,6 @@
 class PagerRenderExt extends PagerRender
     startElement: (def, renderizer) ->
         super(def, renderizer)
-        
   
     afterAllStart: (def, renderizer) ->
         if def.style=='horizontal'

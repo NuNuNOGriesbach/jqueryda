@@ -108,12 +108,25 @@ class FormRender extends SpecificElementRender
             line.element.setInternalWidth(line.element.getRealWidth())
        
     
-    
+    afterAllStart: (def, renderizer) ->
+        groupRenders = def.getGroupRenders()
+        lastTop = 0
+        lastGroup = null
+        for group in groupRenders
+            top = group.element.getTop()
+            if top == lastTop and lastGroup
+                if group.element.getHeight() > lastGroup.element.getHeight()
+                    lastGroup.element.setHeight(group.element.getHeight())
+                else
+                    group.element.setHeight(lastGroup.element.getHeight())
+            
+            lastTop = top
+            lastGroup = group
     
     defineContainerHeights: (def, renderizer) ->
         @heightsDefined = true
-        lineRenders = def.getLineRenders()
-        groupRenders = def.getGroupRenders()
+        #lineRenders = def.getLineRenders()
+        
         pagerRenders = def.getPagerRenders()
         maxPage = null
                         
@@ -133,3 +146,4 @@ class FormRender extends SpecificElementRender
                 pager.element.setHeight(diff)
 
         
+                
