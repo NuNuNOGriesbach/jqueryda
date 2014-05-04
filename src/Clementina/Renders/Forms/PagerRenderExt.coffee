@@ -4,16 +4,23 @@ class PagerRenderExt extends PagerRender
         
   
     afterAllStart: (def, renderizer) ->
-        $('#' + def.id).tabs({ 
-            heightStyle: "fill" }            
-        )
+        if def.style=='horizontal'
+            $('#' + def.id).tabs({ 
+                heightStyle: "fill" }            
+            )
+        else
+            $('#' + def.id).accordion({ 
+                heightStyle: "fill" }            
+            )
         
         for child in def.children
             $(child.component).removeClass('ui-tabs-panel')
         
     beforeRealignChildren: (def, renderizer) ->
-        $('#' + def.id).tabs('destroy')
-        
+        if def.style=='horizontal'
+            $('#' + def.id).tabs('destroy')
+        else
+            $('#' + def.id).accordion('destroy')
          
         
     
