@@ -4,3 +4,12 @@ class Bar extends Form
     #Estilo Page: Elementos seguirão regras de outro container
     getContainerStyle: () ->
         'Bar'
+
+    _getMaxChildrenSize: ()  ->
+        maxSize = 0
+        for child in @children
+             size = child.getSizeInScreen() * 1
+             if size > maxSize
+                maxSize = size
+                
+        maxSize

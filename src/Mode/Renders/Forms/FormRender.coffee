@@ -31,7 +31,9 @@ class FormRender extends SpecificElementRender
         else if windowWidth < 900
             
             $('body').css('font-size', 10)
-        
+        else    
+            $('body').css('font-size', 11)
+            
         lineRenders = def.getLineRenders()
         groupRenders = def.getGroupRenders()
         pagerRenders = def.getPagerRenders()
@@ -45,40 +47,20 @@ class FormRender extends SpecificElementRender
         for line in lineRenders
             line.afterFormStart()
             
-#
-#
-#        lastElements = []
-#        lastTop = 0
-#        lastElement = null
-#        for line in lineRenders
-#            for element in line.elements
-#                top = element.getTop()
-#                if(lastTop != top)
-#                    lastTop = top
-#                    lastElements.push(lastElement) if lastElement
-#                lastElement = element
-#        
-#        lastElements.push(lastElement) if lastElement
-#                
-#        maxRight = 0;
-#        maxBottom = 0;
-#        for endLine in lastElements when not endLine.sameRight
-#            right = endLine.getRight()
-#            bottom = endLine.getBottom()
-#            if(right > maxRight)
-#                maxRight = right
-#                extra = element.getExtraWidth()
-#            if(bottom > maxBottom)
-#                maxBottom = bottom
-#        
-#        for group in groupRenders
-#            right = group.element.getRight()
-#            extraGroup = group.element.getExtraWidth()
-#            if(right > maxRight)
-#                maxRight = right
-#                
-#        def.maxRight = maxRight
-
+    realignElement: (def, renderizer) ->
+        $(ret).removeClass('form')        
+        def.firstSize = $('body').width()
+        $(def.element).width('100%')
+        
+    afterRealignChildren: (def, renderizer) ->
+        
+    afterRealignChildren: (def, renderizer) ->
+        
+    
+    afterAllRealign: (def, renderizer) ->
+        
+        @startElement(def, renderizer)
+        @afterAllStart(def, renderizer)    
     
     
     # Adiciona classes de marcação, de acordo com a posição e tipo de elemento
@@ -106,14 +88,15 @@ class FormRender extends SpecificElementRender
         Math.round (element.size * sizeScreen / componentsSizes) - 1
         
     defineContainerWidths: (def, renderizer) ->
+        
         lineRenders = def.getLineRenders()
         groupRenders = def.getGroupRenders()
         pagerRenders = def.getPagerRenders()
         
-        for group in groupRenders
+        for group in groupRenders            
             group.element.setWidth("94.42%")
             group.element.setInternalWidth(group.element.getRealWidth())
-            
+                        
         for pager in pagerRenders
             pager.element.setWidth("94.42%")
             pager.element.setInternalWidth(pager.element.getRealWidth())

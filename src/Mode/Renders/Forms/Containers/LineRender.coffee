@@ -46,15 +46,15 @@ class LineRender extends FormRender
             @_justify(def, this, renderizer, children, def.getParent(),'width',100)
         
         else if def.align == 'left'
-            @renderLeft(def, renderizer, children)
+            @_renderLeft(def, renderizer, children)
         else if def.align == 'pseudoJustify'
-            @renderLeft(def, renderizer, children)
+            @_renderLeft(def, renderizer, children)
             
             @afterFormStart = ->                 
                 @_justify(def, this, renderizer, children, $('#' + def.justitfyElement).element(),'right',100)
                                 
         else if def.align == 'pseudoJustifyHalf'
-            @renderLeft(def, renderizer, children)
+            @_renderLeft(def, renderizer, children)
             @afterFormStart = -> 
                 @_justify(def, this, renderizer, children, $('#' + def.justitfyElement).element(),'right',50)
         else                        
@@ -66,7 +66,7 @@ class LineRender extends FormRender
         
     
     ## Renderiza as linhas com alinhamento Left ocupando apenas o espaço necessário para s campos
-    renderLeft: (def, renderizer, children) ->
+    _renderLeft: (def, renderizer, children) ->
         @analizeHumanComfortableSize(def, renderizer, children)    
 
 

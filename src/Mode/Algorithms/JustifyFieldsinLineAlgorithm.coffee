@@ -51,7 +51,9 @@ class JustifyFieldsInLineAlgoritm
             @sizeScreen -= (margin * 2)
             
         ## Justes na força bruta para resolucoes estranhas
-        windowWidth = $(window).width()
+        windowWidth = $(window).width() * 1
+        
+        #console.log('screenSize', @sizeScreen, 'margin', margin)
         
         if windowWidth < 300
             @sizeScreen -= margin * 4
@@ -62,8 +64,10 @@ class JustifyFieldsInLineAlgoritm
         else if windowWidth < 700
             @sizeScreen -= margin * 2
             
-        else if windowWidth < 900
-            @sizeScreen -= margin
+        else if windowWidth < 1000
+            @sizeScreen -= margin * 0.5
+        else if windowWidth < 1200
+            @sizeScreen -= margin * 0.9
         
         
     _getJustifyWidth: (element, children, sizeScreen, componentsSizes, usedSize, renderCount) ->

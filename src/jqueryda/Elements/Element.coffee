@@ -72,7 +72,19 @@ class Element
             child.afterAllStart(renderizer)
         @specificRender?.afterAllStart(this, renderizer)    
          
+    realign: (renderizer) ->        
+        @specificRender?.beforeRealignChildren?(this, renderizer)
+            
+        for child in @children
+            child.realign(renderizer)
+        @specificRender?.afterRealignChildren?(this, renderizer)    
+        @specificRender?.realignElement?(this, renderizer)
         
+    afterAllRealign: (renderizer) ->        
+        
+        for child in @children
+            child.afterAllRealign(renderizer)
+        @specificRender?.afterAllRealign?(this, renderizer)     
         
 
     setValue: (value) ->

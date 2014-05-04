@@ -41,6 +41,15 @@ class RenderizerAbstract
         
         for root in @roots
             root.afterAllStart this
+            
+    realignElements: () ->       
+        for root in @roots
+            root.realign this
+        
+        @defineContainerWidths()
+        
+        for root in @roots
+            root.afterAllRealign this        
         
     renderDependences: () ->
         #@addCssFile('jquerida.css')

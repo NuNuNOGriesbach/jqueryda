@@ -34,3 +34,9 @@ class TextFieldRender extends SpecificElementRender
         
         def.setWidth( width + diffW) if maxRight > right     
         @
+        
+    realignElement: (def, renderizer) ->
+        
+        #Possibilita que os campos estejam na mesma linha para calcular o padding, independente da largura...
+        #Quado nem assim os campos de uma linha, estão na mesma linha, todos devem receber 100%
+        def.setWidth(10)

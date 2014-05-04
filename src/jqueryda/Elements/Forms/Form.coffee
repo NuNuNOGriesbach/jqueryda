@@ -3,6 +3,7 @@ class Form extends Element
         @humanConfortLimit = 8.1
         super(@attribs)
         @lineRenders = []
+        @barRenders = []
         @groupRenders = []
         @pagerRenders = []
         
@@ -27,6 +28,12 @@ class Form extends Element
     getLineRenders: () ->
         @lineRenders 
     
+    addBarRender: (barRender) ->
+        @barRenders.push(barRender)
+        
+    getBarRenders: () ->
+        @barRenders 
+    
     addGroupRender: (groupRender) ->
         @groupRenders.push(groupRender)
         
@@ -47,9 +54,11 @@ class Form extends Element
             return super(value)
             
         if value.search?('%') > -1
+            
             parentW = @getRealWidth()
             parentW = @firstSize if @firstSize
             @firstSize = parentW
+                       
             return Math.round( parentW * value.substr(0,value.length - 1)  / 100)
         return value  
         
@@ -72,7 +81,15 @@ class Form extends Element
                 if size > maxSize
                     maxSize = size
             return maxSize
-        
+        bars = @getBarRenders()
+        if(bars.length > 0)
+            maxSize = 0
+            for bar in bars
+                size = bar.element.getSizeInScreen() * 1
+                if size > maxSize
+                    maxSize = size
+            return maxSize
+            
         maxSize = 0
         for child in @children
             maxSize += child.getSizeInScreen() * 1

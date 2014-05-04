@@ -28,8 +28,7 @@ class GroupRender extends FormRender
     defineContainerWidths: (def, renderizer) ->
     
     ajustRight: (element, maxRight, extra) ->        
-           
-        
-        
+          
+            
     
         

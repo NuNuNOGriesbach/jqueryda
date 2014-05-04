@@ -7,7 +7,7 @@ applicationModeFiles  = []
 inArray = []
 test = []
 
-listFiles = (path, inArray) ->
+listFiles = (path, inArray, pseudoOrder) ->
     
     files = fs.readdirSync path
         

@@ -24,7 +24,8 @@ class PagerRender extends FormRender
         $(tabButton).append(link)
         $(@element.obj_pager).append(tabButton)
         
-      
+    
+            
         
     defineContainerWidths: (def, renderizer) ->
         for page in @element.children            
