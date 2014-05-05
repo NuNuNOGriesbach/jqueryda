@@ -11,7 +11,12 @@ class CreateCommand
         render = @parent.render
         render.renderDependences()
         
+        self = this
+        setTimeout( ->
+            self.linkEvents(elements)
+        ,0)
         
+        console.log('FUNCIONOU! se estiver antes dos senders')
         $(window).load () -> 
             render.render()
             render.defineContainerWidths(this)
@@ -29,3 +34,7 @@ class CreateCommand
     getInstance: (type, attribs) ->
         eval 'ret = new ' + type + '(attribs);'
         ret
+        
+    linkEvents: (elements) ->
+        for element, attribs of elements
+            console.log('sender', element)

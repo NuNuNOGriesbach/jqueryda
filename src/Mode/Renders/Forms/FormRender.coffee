@@ -114,8 +114,8 @@ class FormRender extends SpecificElementRender
         lastTop = 0
         lastGroup = null
         for group in groupRenders
-            
-            $(group.element.component).css('width',"initial")
+            if group.element.parent.type != 'Form'
+                $(group.element.component).css('width',"initial")
             
             top = group.element.getTop()
             if top == lastTop and lastGroup
@@ -147,6 +147,6 @@ class FormRender extends SpecificElementRender
             pager.element.setHeight(maxUsedHeight)
             if pager.element.getBottom() < maxBottom
                 diff = maxBottom - maxUsedHeight - pager.element.getTop()
-                pager.element.setHeight(diff)
+                pager.element.setHeight(diff * 1.1)
 
                     
