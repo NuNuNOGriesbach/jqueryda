@@ -49,7 +49,11 @@ class RenderizerAbstract
         @defineContainerWidths()
         
         for root in @roots
-            root.afterAllRealign this        
+            root.afterAllRealign this  
+       
+        @defineContainerHeights()
+       
+        @
         
     renderDependences: () ->
         #@addCssFile('jquerida.css')

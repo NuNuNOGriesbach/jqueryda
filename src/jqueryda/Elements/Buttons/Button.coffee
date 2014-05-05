@@ -1,0 +1,1 @@
+class Button extends Element

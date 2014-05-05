@@ -18,7 +18,7 @@ class zRender
     
     execute: (command, elements) ->
         executerName = command + 'Command'
-        eval 'var executerInstance = new ' + executerName + '(this)'
+        eval 'var executerInstance = new ' + executerName + '(this)'        
         executerInstance.execute(elements)
     
     

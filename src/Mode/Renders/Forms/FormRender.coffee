@@ -109,10 +109,14 @@ class FormRender extends SpecificElementRender
        
     
     afterAllStart: (def, renderizer) ->
+        
         groupRenders = def.getGroupRenders()
         lastTop = 0
         lastGroup = null
         for group in groupRenders
+            
+            $(group.element.component).css('width',"initial")
+            
             top = group.element.getTop()
             if top == lastTop and lastGroup
                 if group.element.getHeight() > lastGroup.element.getHeight()
@@ -126,7 +130,7 @@ class FormRender extends SpecificElementRender
     defineContainerHeights: (def, renderizer) ->
         @heightsDefined = true
         #lineRenders = def.getLineRenders()
-        
+        groupRenders = def.getGroupRenders()
         pagerRenders = def.getPagerRenders()
         maxPage = null
                         
@@ -145,5 +149,4 @@ class FormRender extends SpecificElementRender
                 diff = maxBottom - maxUsedHeight - pager.element.getTop()
                 pager.element.setHeight(diff)
 
-        
-                
+                    

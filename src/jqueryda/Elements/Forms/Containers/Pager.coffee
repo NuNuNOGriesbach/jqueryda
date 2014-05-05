@@ -1,6 +1,7 @@
 class Pager extends Form
     constructor: (@attribs) ->   
         super(@attribs)
+        @style = 'horizontal' if not @style
         
     start: (renderizer) ->
        @specificRender?.beforeStartChildren(this, renderizer)
