@@ -82,13 +82,7 @@ class FormRender extends SpecificElementRender
             
             $(child.component).attr("in",child.parent.getContainerStyle())
         
-    getWidth: (element, children, sizeScreen, componentsSizes, usedSize, renderCount) ->
-        @lastElement = element
-        
-        if renderCount == children
-            return (sizeScreen - usedSize) 
-        Math.round (element.size * sizeScreen / componentsSizes) - 1
-        
+       
     defineContainerWidths: (def, renderizer) ->
         @widthsDefined = true
         lineRenders = def.getLineRenders()
@@ -128,25 +122,6 @@ class FormRender extends SpecificElementRender
             lastGroup = group
     
     defineContainerHeights: (def, renderizer) ->
-        @heightsDefined = true
-        #lineRenders = def.getLineRenders()
-        groupRenders = def.getGroupRenders()
-        pagerRenders = def.getPagerRenders()
-        maxPage = null
-                        
-        for pager in pagerRenders            
-            maxUsedHeight = 0
-            if pager.element.children.length > 0
-                for page in pager.element.children
-                    usedHeight = page.getUsedHeight()
-                    if usedHeight > maxUsedHeight
-                        maxUsedHeight = usedHeight
-                        maxBottom = page.getMaxBottom()
-                        maxPage = page
-                
-            pager.element.setHeight(maxUsedHeight)
-            if pager.element.getBottom() < maxBottom
-                diff = maxBottom - maxUsedHeight - pager.element.getTop()
-                pager.element.setHeight(diff * 1.1)
+        
 
                     

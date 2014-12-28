@@ -13,7 +13,8 @@ class TextField extends Element
                 @humanConfortLimit = 3.1
             else if @size > 80
                 @humanConfortLimit = 6.1
-            
+            else
+                @humanConfortLimit = 6.1
                 
     
     setValue: (value) ->
@@ -29,7 +30,7 @@ class TextField extends Element
         $(@obj_label).html()
     
     
-    setWidth: (value) ->        
+    setWidth: (value) ->  
         value = @getPointsForWidth(value)
         if @maxWidth and value > @maxWidth 
             value = @maxWidth 
@@ -41,12 +42,13 @@ class TextField extends Element
             $(@obj_field).css('width', value - @diferenca) 
             
         catch e
+            console.log(e)
         try
             real = @getRealWidth()
             @diferenca = real - value
                         
         catch e
-    
+            console.log('2', e)
           
         
     setHeight: (value) ->

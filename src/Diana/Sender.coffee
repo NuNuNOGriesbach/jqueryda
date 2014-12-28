@@ -1,3 +1,3 @@
-class Sender
-    constructor: (@parent) ->
-        console.log('design sender')
+class Sender extends SenderAbstract
+        
+    

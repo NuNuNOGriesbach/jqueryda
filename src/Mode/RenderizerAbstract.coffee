@@ -11,6 +11,7 @@ class RenderizerAbstract
         @elements[name] = instance
         @elements[instance.parent]?.addElement(instance) if instance.parent
         @roots.push(instance) if not instance.parent
+        
     
     addContainer: (instance) ->
         @containers.push instance
@@ -29,7 +30,14 @@ class RenderizerAbstract
         
     render: () ->
         for root in @roots
-            root.render $('body'), this
+            root.render null, this
+            
+    renderOne: (elementRoot) ->
+        @elements[elementRoot].render null, this     
+        
+    startElement: (elementRoot) ->
+        @elements[elementRoot].start this
+        @elements[elementRoot].afterAllStart this
             
     createElement: (def) ->
         specificRender = InstanceManager.getInstanceOrDefault(def.type + 'Render', 'SpecificElementRender', def)
@@ -42,13 +50,14 @@ class RenderizerAbstract
         for root in @roots
             root.afterAllStart this
             
-    realignElements: () ->       
-        for root in @roots
+    realignElements: (target) ->       
+        targetRoot = target || @roots
+        for root in targetRoot
             root.realign this
         
         @defineContainerWidths()
         
-        for root in @roots
+        for root in targetRoot
             root.afterAllRealign this  
        
         @defineContainerHeights()
@@ -80,10 +89,13 @@ class RenderizerAbstract
                 if not instance.parent.specificRender.widthsDefined                
                     instance.parent.specificRender.defineContainerWidths(instance.parent, this)
             else
-                instance.setWidth('100%')
+                if instance.parentIfNotParent
+                    $(instance.specificRender.component).css('width', $(instance.parentIfNotParent).css('width') )
+                else
+                    instance.setWidth('100%')
                 
         #@stop()
-        console.log('RENDER_ABSTRACT: Larguras de containers definidas')
+        #console.log('RENDER_ABSTRACT: Larguras de containers definidas')
             
     #Evento chamado ao fim do processo, para que container renderizados lado-a-lado possam assumir a mesma altura   
     defineContainerHeights: (createCommand) ->
@@ -98,5 +110,22 @@ class RenderizerAbstract
             else
                 instance.setHeight('100%')
                 
-        #@stop()
-        console.log('RENDER_ABSTRACT: Alturas de containers definidas')
+        
+    linkDefaulsInElements: (elements) ->        
+        for element, instance of elements
+            @elements[element].specificRender?.linkDefaults(@elements[element], this)
+            
+    require: (library, callback, errorCallback) ->
+        $.ajax({
+            url: library,
+            dataType: "script",
+            async: false,         
+            success: (data, textStatus, jqXHR) ->
+                callback(data, textStatus, jqXHR)
+            ,
+            error: (jqXHR, textStatus, errorThrown) ->
+                if errorCallback == 'function'
+                    errorCallback(jqXHR, textStatus, errorThrown)
+                else
+                    throw new Error("Não foi possível encontrar a library: " + library);
+        })

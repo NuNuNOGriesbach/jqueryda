@@ -1,4 +1,4 @@
-class Button extends Element
+class IconButton extends Element
     setValue: (value) ->
         $(@obj_field).val(value)
         
@@ -9,4 +9,10 @@ class Button extends Element
         $(@obj_field).val(value)
         
     getLabel: (value) ->
+        $(@obj_field).val()
+        
+    setIcon: (value) ->
+        $(@obj_field).val(value)
+        
+    getIcon: (value) ->
         $(@obj_field).val()

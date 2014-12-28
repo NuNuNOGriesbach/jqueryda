@@ -7,14 +7,29 @@ class FormRenderExt extends FormRender
         #$(ret).height($('body').height())
         $('body').addClass('ui-widget-content')
         $('body').addClass('noborder')
-        $(window).on('resize', ->
-            renderizer.realignElements()
-            )
+        
+        @defineEvents(def, renderizer)
+        
         ret
     
+    defineEvents: (def, renderizer) ->
+        $(window).on('resize', (e) ->
+            console.log('********EVENT: ', e)
+            if e.target == window
+                renderizer.realignElements()
+                
+        )
+            
     startElement: (def, renderizer) ->
         ret = super(def, renderizer)
-        $(@component).height(screen.availHeight)
+        
+        if typeof(def.parentIfNotParent) != 'undefined' && def.parentIfNotParent != 'body'
+            parent = $(def.parentIfNotParent)
+            
+            parentH = parent.getClientRects()['height']
+            $(@component).height(parentH)
+        else
+            $(@component).height(screen.availHeight)
         $(@component).addClass('noborder')
         
         ret

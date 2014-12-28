@@ -1,3 +1,1 @@
-class Render
-    constructor: (@parent) ->
-        console.log('design render')
+class Render extends RenderizerAbstract

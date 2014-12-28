@@ -11,6 +11,8 @@ class HumanConfortableSizesAlgorithm
                 
         for child in $('#' + def.id).children()
             element = $(child).element()
+            if element == undefined
+                continue
             element.equalizeRects()
             
             if(trySize)

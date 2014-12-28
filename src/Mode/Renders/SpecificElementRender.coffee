@@ -21,3 +21,11 @@ class SpecificElementRender
     #Evento chamado após o start de todos os elementos, proprio para rotinas que tornam DIVs invisiveis e impedem o acesso
     #das propriedades metricas... por exemplo o metodo tabs() do jquery-ui
     afterAllStart: (def, renderizer) ->   
+    
+    #Metodo para definir eventos em elementos renderizados
+    bindEvent: (def, eventName, functionName, container, sendList, serverEvent ) ->
+   
+    #metodo chamado apenas uma vez, para configurar eventos e propriedades padrão do componente
+    linkDefaults: (def, renderizer) ->
+        
+    

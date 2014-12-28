@@ -17,3 +17,9 @@ class Pager extends Form
         for page in @children
             page.setHeight(height)            
         super(height)
+        
+    resetHeight: () ->
+        $(@component).css('height','auto')
+        for page in @children
+            page.resetHeight()   
+        console.log('Pager resetada')

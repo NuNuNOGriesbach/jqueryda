@@ -15,6 +15,7 @@ class PagerRenderExt extends PagerRender
         for child in def.children
             if def.style=='horizontal'
                  $(child.component).removeClass('ui-tabs-panel')
+                 $(child.component).css('height','initial')
             else
                 $(child.component).removeClass('ui-accordion-content')
                 $(child.component).css('height','initial')

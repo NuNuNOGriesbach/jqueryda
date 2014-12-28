@@ -50,11 +50,11 @@ class Form extends Element
         @getRight()
         
     getPointsForWidth: (value) ->
-        if @type!='Form'
+        if @type != 'Form'
             return super(value)
             
         if value.search?('%') > -1
-            
+            console.log(value)
             parentW = @getRealWidth()
             parentW = @firstSize if @firstSize
             @firstSize = parentW
@@ -131,3 +131,4 @@ class Form extends Element
         return 15;
         
         
+    

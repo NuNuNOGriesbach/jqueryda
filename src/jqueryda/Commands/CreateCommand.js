@@ -21,15 +21,14 @@ CreateCommand = (function() {
     render = this.parent.render;
     render.renderDependences();
     self = this;
-    setTimeout(function() {
-      return self.linkEvents(elements);
-    }, 0);
-    console.log('FUNCIONOU! se estiver antes dos senders');
     return $(window).load(function() {
       render.render();
       render.defineContainerWidths(this);
       render.defineContainerHeights(this);
-      return render.startElements();
+      render.startElements();
+      return setTimeout(function() {
+        return self.linkEvents(elements);
+      }, 0);
     });
   };
 
@@ -40,7 +39,8 @@ CreateCommand = (function() {
       instance.name = element;
     }
     instance.id = element;
-    return this.parent.render.addElement(element, instance);
+    this.parent.render.addElement(element, instance);
+    return this.parent.render;
   };
 
   CreateCommand.prototype.getInstance = function(type, attribs) {
@@ -49,13 +49,10 @@ CreateCommand = (function() {
   };
 
   CreateCommand.prototype.linkEvents = function(elements) {
-    var attribs, element, _results;
-    _results = [];
-    for (element in elements) {
-      attribs = elements[element];
-      _results.push(console.log('sender', element));
-    }
-    return _results;
+    var render;
+    render = this.parent.render;
+    console.log('linkando com', render);
+    return render.linkDefaulsInElements(elements);
   };
 
   return CreateCommand;

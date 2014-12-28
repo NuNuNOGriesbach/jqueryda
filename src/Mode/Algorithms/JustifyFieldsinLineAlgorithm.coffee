@@ -11,7 +11,7 @@ class JustifyFieldsInLineAlgoritm
     ocupado    
     ###
     run: (@def, specificRender, @renderizer, children, @screenElement, @methodToGetSizeScreen, @percentual) ->
-        #Coloca os campos lado-a-lado e calcla o tamanho relativo total
+        #Coloca os campos lado-a-lado e calcula o tamanho relativo total
         @_initialize()
         @_calculateComponentSizes('left')
         @_calculateSizeScreen()   

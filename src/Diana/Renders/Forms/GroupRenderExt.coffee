@@ -1,14 +1,9 @@
-class GroupRender extends FormRender
+class GroupRenderExt extends SpecificElementRender
     createElement: (def, renderizer) ->
         ret = document.createElement('fieldset')
         def.obj_label = document.createElement('legend')
         def.component = ret
         $(ret).append(def.obj_label) 
-        
-        if(def.align and def.align=='left')
-            $(ret).addClass('groupLeft')
-        else
-            $(ret).addClass('group')
             
         def.setLabel(def.label) if def.label
         
@@ -26,7 +21,8 @@ class GroupRender extends FormRender
         
             
     defineContainerWidths: (def, renderizer) ->
-        @element.setWidth(def.width) if def.width
+        
+    defineContainerHeights: (def, renderizer) ->
     
     ajustRight: (element, maxRight, extra) ->        
           

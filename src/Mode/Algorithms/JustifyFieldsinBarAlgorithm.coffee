@@ -68,7 +68,9 @@ class JustifyFieldsInBarAlgoritm
     _defineNewWidths: () ->
         for child in $('#' + @def.id).children()
             element = @renderizer.elements[child.id]
-            
+            if(element == undefined)
+                continue
+                
             @renderCount++             
             if !element.isContainer() or @processContainers
                 

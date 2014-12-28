@@ -12,5 +12,7 @@ class Page extends Form
         @specificRender?.beforeStartChildren(this, renderizer)
         super(renderizer)
         
-    
+    resetHeight: () ->
+        $(@component).css('height','auto')
+        console.log('Page resetada')
     
