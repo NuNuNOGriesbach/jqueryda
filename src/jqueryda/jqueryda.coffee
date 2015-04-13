@@ -46,7 +46,10 @@ config=null
 messageManager=null
 $ ->
     jqueryda = new zRender(new Render(), new Sender())
-    jqueryda.start()
     messageManager = new MessageManager(jqueryda)
     jqueryda.messageManager = messageManager
+    
+    jqueryda.start()
+    
+    
     config = jqueryda.config

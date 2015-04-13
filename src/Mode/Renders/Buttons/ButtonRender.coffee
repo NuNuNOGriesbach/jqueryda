@@ -25,7 +25,8 @@ class ButtonRender extends SpecificElementRender
         $(def.obj_field).on(eventName, (e)->
             functionExec = functionName + '("' + sendList + '", "'+container+'","'+serverEvent+'",def,self,sender);';
             try
-                #console.log(sender)
+                #console.log('bind exec')
+                #console.log(sender, def, eventName, functionName, container, sendList, serverEvent)
                 eval (functionExec)
             catch e
                 alert('Execute ' + functionName + ': ' + e);
